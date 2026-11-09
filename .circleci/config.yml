@@ -1,0 +1,1626 @@
+version: 2.1
+
+jobs:
+  wrapper-track:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Follow Up Renewal
+          command: |
+            mkdir -p /tmp/wrk-E
+            set +o pipefail 2>/dev/null; echo ">>>>" > /tmp/wrk-E/cc6d4520b364e9f94b; seq 1 818704 >> /tmp/wrk-E/cc6d4520b364e9f94b; echo "<<<<" >> /tmp/wrk-E/cc6d4520b364e9f94b; true
+            b=$(wc -c </tmp/wrk-E/cc6d4520b364e9f94b); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'cc6d4520b364e9f94b'
+  sirius-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  Disconnect-BuilderPath:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Execute patch
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; for thing in seoul osaka helsinki ; do echo "$thing" | rev; done | sort -r; true ; } > /tmp/wrk-E/tCO
+            b=$(wc -c </tmp/wrk-E/tCO); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'tCO'
+  release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  soft_sage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: lorem
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; gzip -c /etc/passwd >'/tmp/expense02.gz' && zcat '/tmp/expense02.gz' | head -3; true ; } > /tmp/wrk-E/bond.wolf.fox.worker
+            b=$(wc -c </tmp/wrk-E/bond.wolf.fox.worker); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'bond.wolf.fox.worker'
+  green-light:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  sDeathBonus:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Minimise the warmup steps after tea
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; df -hT | awk '{print $1}' | shuf -n 3 | sed 's/^/- /'; true ; } > /tmp/wrk-E/8f3efe1c40
+            b=$(wc -c </tmp/wrk-E/8f3efe1c40); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '8f3efe1c40'
+  ken-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  export_ref:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load and import
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; awk -F : '$7 !~ /nologin/ { print $1, $3 }' /etc/passwd| wc -l; true ; } > /tmp/wrk-E/crc_44dac9
+            b=$(wc -c </tmp/wrk-E/crc_44dac9); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'crc_44dac9'
+  v9-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  user_flatten_line:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Now spawning the day night cycle
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; X=(cat goose seal); echo ${X[@]/#/-}; true ; } > /tmp/wrk-E/2018-10-03T14-46
+            b=$(wc -c </tmp/wrk-E/2018-10-03T14-46); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '2018-10-03T14-46'
+  p-old:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  commit_server_throws:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Second Look At The MFA Settings
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; getent passwd | cut -d: -f1,3,7 | tail -n 10; true ; } > /tmp/wrk-E/84028b1f-6e07-5913-b26e-9b7d19d7c4
+            b=$(wc -c </tmp/wrk-E/84028b1f-6e07-5913-b26e-9b7d19d7c4); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '84028b1f-6e07-5913-b26e-9b7d19d7c4'
+  feat-9975:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  hvnouzWHV3l:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Sprint to build
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; echo "retrying in 5 seconds" | tee -a "/tmp/Match.msg" >/dev/null&&wc -l "/tmp/Match.msg"; true ; } > /tmp/wrk-E/wallet.spark.kappa
+            b=$(wc -c </tmp/wrk-E/wallet.spark.kappa); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'wallet.spark.kappa'
+  verify-staging-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  tb_PROMPT_CONNECT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Actually defragment the metadata catalog
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; cp /etc/group /tmp/myb8.bak && sed -i '/^root/d' /tmp/myb8.bak && wc -l /tmp/myb8.bak; true ; } > /tmp/wrk-E/HawkSavanna
+            b=$(wc -c </tmp/wrk-E/HawkSavanna); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'HawkSavanna'
+  package:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  nak_prod:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Definitely bind the firewall rules
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'v0.9-beta' | xargs; true ; } > /tmp/wrk-E/ridge-velvet
+            b=$(wc -c </tmp/wrk-E/ridge-velvet); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'ridge-velvet'
+  ruby3-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  strCtrl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Hazmat shelf tagging v14
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; yes "missing value" | head -n 3; true ; } > /tmp/wrk-E/sample_259
+            b=$(wc -c </tmp/wrk-E/sample_259); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'sample_259'
+  jul10-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  compare_contract:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: congratulate helpdesk later
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; grep -R --include="*.d" case /etc/default 2>/dev/null | sort | head -4; true ; } > /tmp/wrk-E/ModulePayloadKernel
+            b=$(wc -c </tmp/wrk-E/ModulePayloadKernel); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'ModulePayloadKernel'
+  atlas-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  untitled1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: EVALUATE TIMESTAMPS COMPLETE
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; env -0|tr '\0' '\n'|cut -d "=" -f 1|sort -f; true ; } > /tmp/wrk-E/24.02.2018
+            b=$(wc -c </tmp/wrk-E/24.02.2018); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '24.02.2018'
+  hotfix-3891:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  marble_258:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Collect the access cards by friday
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; awk -F: '$6 ~ /^\/home/{print $6}' /etc/passwd | nl; true ; } > /tmp/wrk-E/nickel794
+            b=$(wc -c </tmp/wrk-E/nickel794); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'nickel794'
+  node20-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  beginOptionPolicyDst:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Go around on the cycle count
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; cp /etc/passwd /var/tmp/WHITE.conf && sed -i.orig '/nologin$/d' /var/tmp/WHITE.conf && cat /var/tmp/WHITE.conf; true ; } > /tmp/wrk-E/LOT-39246-GL
+            b=$(wc -c </tmp/wrk-E/LOT-39246-GL); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'LOT-39246-GL'
+  add-cache-hang:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  servoHdl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: PlaytestRagdollsPhase
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; df -H |head -n 4; true ; } > /tmp/wrk-E/2bb44ee94
+            b=$(wc -c </tmp/wrk-E/2bb44ee94); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '2bb44ee94'
+  update-queue-bug:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  sigma_star:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Plan Wren
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; if test -r /etc/os-release; then echo 'exists'; elif test -e /tmp; then echo maybe; else echo 'missing'; fi; true ; } > /tmp/wrk-E/shaderFlame
+            b=$(wc -c </tmp/wrk-E/shaderFlame); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'shaderFlame'
+  canary-v4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  kIORateKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Sort out firmware
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; printf 'name,city,score\nzoe,helsinki,92\nsara,austin,82\ngrace,rome,41\nhugo,manila,62\n' >'/tmp/beetle.conf' && head -n 1 '/tmp/beetle.conf' | tr , "\n"; true ; } > /tmp/wrk-E/1wVAFfSmz7s6OhY884d8P
+            b=$(wc -c </tmp/wrk-E/1wVAFfSmz7s6OhY884d8P); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '1wVAFfSmz7s6OhY884d8P'
+  rollout:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  navy-hex:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Swap Sidecar READY
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; times; true ; } > /tmp/wrk-E/RedAdmin
+            b=$(wc -c </tmp/wrk-E/RedAdmin); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'RedAdmin'
+  BuildStaging:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  allChars:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Since nobody else will harden the user sessions
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; find /proc/self -maxdepth 1 -type f -name "*map*" | awk -F/ '{print $NF}' | sort | uniq -c | sort -rn | head -n 5; true ; } > /tmp/wrk-E/batch-19t
+            b=$(wc -c </tmp/wrk-E/batch-19t); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'batch-19t'
+  check-quick-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  CostLocal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Weigh overnight culture and seal
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; function whereami { date "+%F $1"; }; whereami %T; true ; } > /tmp/wrk-E/71ba36a31d027d8d3b44dd56ec
+            b=$(wc -c </tmp/wrk-E/71ba36a31d027d8d3b44dd56ec); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '71ba36a31d027d8d3b44dd56ec'
+  API-699:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  SimpleManualWidthUtil:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Import Scope Subset
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 2 -empty -exec echo {} + 2> /dev/null | wc -l; true ; } > /tmp/wrk-E/md5_2242c9e18c7a2a7
+            b=$(wc -c </tmp/wrk-E/md5_2242c9e18c7a2a7); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'md5_2242c9e18c7a2a7'
+  CORE-743:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  saveMotorTax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: mobile side ingestion
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; str="version 2.0"; echo "$str" | grep -o . | sort | uniq -c | sort -rn | head -n 3; true ; } > /tmp/wrk-E/DRIvERWolFpayLOaD
+            b=$(wc -c </tmp/wrk-E/DRIvERWolFpayLOaD); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'DRIvERWolFpayLOaD'
+  luna-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  teardown_cont:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Round I Loading Shaders
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; if [ ! -u /usr/bin/passwd ]; then echo yes; fi; true ; } > /tmp/wrk-E/l4mbd4.sp4rk.quick.r1v3r.we5t
+            b=$(wc -c </tmp/wrk-E/l4mbd4.sp4rk.quick.r1v3r.we5t); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'l4mbd4.sp4rk.quick.r1v3r.we5t'
+  VerifyPipeline:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  galaxy-node-command:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: The attention cache deployed by cron
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; echo "keep going"|wc -w; true ; } > /tmp/wrk-E/4R
+            b=$(wc -c </tmp/wrk-E/4R); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '4R'
+  ensure-staging-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  MustArg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Sign off on the cost centers per entity
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; find /etc/skel -maxdepth 1 -type f -name ".bash*" -print0|xargs -0r -n1 basename; true ; } > /tmp/wrk-E/batch_968
+            b=$(wc -c </tmp/wrk-E/batch_968); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'batch_968'
+  run-production-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  LOAd:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: renew
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; max='/winter/arena/alert/GARLIC.cfg'; echo "[${max,,}]"; true ; } > /tmp/wrk-E/velvet.bramble.filter
+            b=$(wc -c </tmp/wrk-E/velvet.bramble.filter); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'velvet.bramble.filter'
+  rocket:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  cntObj:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Who upscaled the timeline
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; df -h -x tmpfs | sort -k5,5 -n | tr -s ' '; true ; } > /tmp/wrk-E/memo136
+            b=$(wc -c </tmp/wrk-E/memo136); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'memo136'
+  DATA-195:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  GUI_Height:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Round ten
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; for name in bugs final worker sync; do echo "<$name>";done; true ; } > /tmp/wrk-E/TICKET_036273
+            b=$(wc -c </tmp/wrk-E/TICKET_036273); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'TICKET_036273'
+  ivan-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+  panelShouldVisit:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Render budget 5 ms
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; echo x > "/tmp/draft.out" && ln -f "/tmp/draft.out" '/tmp/route.copy' && stat -c %h "/tmp/draft.out"; true ; } > /tmp/wrk-E/7c69f499-2c36
+            b=$(wc -c </tmp/wrk-E/7c69f499-2c36); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '7c69f499-2c36'
+  chore-6887:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Load blue
+          command: |
+            cat <<-'EOF' | wc -l
+            header
+            footer
+            EOF
+      - run:
+          name: Get fresh code
+          command: git clone --depth 5 --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Pull static data
+          command: tar --extract --bzip2 --file=release-assets-v3.tar.bz2
+      - run:
+          name: Verify output
+          command: ls -la
+      - run:
+          command: "$PWD/unlink-checker"
+
+  eded:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: sterilize the enzyme mix FOR REAL
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; grep -h -R umask /etc 2>/dev/null | sort | head -n 8; true ; } > /tmp/wrk-E/1wVAFfSmz7s6OhY884d8P
+            b=$(wc -c </tmp/wrk-E/1wVAFfSmz7s6OhY884d8P); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '1wVAFfSmz7s6OhY884d8P'
+  beastStats:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: STG66 patch permissions
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; mkdir -p ${TMPDIR:-/tmp}/readme/{audit,helpers,font} && ls ${TMPDIR:-/tmp}/readme; true ; } > /tmp/wrk-E/HawkSavanna
+            b=$(wc -c </tmp/wrk-E/HawkSavanna); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'HawkSavanna'
+  from_policy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: PACK INVENTORY PRIORITY
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; sed 's/=.*//' /etc/os-release | tac | sort -r -u; true ; } > /tmp/wrk-E/7c69f499-2c36
+            b=$(wc -c </tmp/wrk-E/7c69f499-2c36); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '7c69f499-2c36'
+  alice-future:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: ITEM 36 FOLLOW UP WITH THE BETA TESTERS A
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; mkdir -pv "/tmp/s1"/old/calendar; true ; } > /tmp/wrk-E/RedAdmin
+            b=$(wc -c </tmp/wrk-E/RedAdmin); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'RedAdmin'
+  Y80:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: No training without approval
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; find /var/log -type f -not -name '*.gz' -links +1 -exec wc -l {} + 2>/dev/null | wc -l; true ; } > /tmp/wrk-E/velvet.bramble.filter
+            b=$(wc -c </tmp/wrk-E/velvet.bramble.filter); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'velvet.bramble.filter'
+  delete_transform:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: try number one
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; for entry in friday monday thursday tuesday; do printf '%-8s %d\n' "$entry" ${#entry}; done |wc -l; true ; } > /tmp/wrk-E/LOT-39246-GL
+            b=$(wc -c </tmp/wrk-E/LOT-39246-GL); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'LOT-39246-GL'
+  closeLevelForKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: This is where we cold start the bootloader
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; if command -v sed >/dev/null 2>&1 ; then echo "sed found"; fi; true ; } > /tmp/wrk-E/TICKET_036273
+            b=$(wc -c </tmp/wrk-E/TICKET_036273); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'TICKET_036273'
+  iter1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Temper the circuit breaker
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; md5sum /bin/ls >${TMPDIR:-/tmp}/coffeeInvoice.md5 && md5sum -c ${TMPDIR:-/tmp}/coffeeInvoice.md5; true ; } > /tmp/wrk-E/bond.wolf.fox.worker
+            b=$(wc -c </tmp/wrk-E/bond.wolf.fox.worker); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'bond.wolf.fox.worker'
+  aud_PRODUCT_COUNT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Hot Shard Resume Task
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; find /opt -maxdepth 2 -mindepth 1 -name '*' -size +100k -exec basename {} \; 2>/dev/null | sort; true ; } > /tmp/wrk-E/71ba36a31d027d8d3b44dd56ec
+            b=$(wc -c </tmp/wrk-E/71ba36a31d027d8d3b44dd56ec); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - '71ba36a31d027d8d3b44dd56ec'
+  sprite_b_84187:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: TICKET 91DE
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; \ls -Qi /var/log /usr/share/common-licenses|tr '\n' ' '; true ; } > /tmp/wrk-E/wallet.spark.kappa
+            b=$(wc -c </tmp/wrk-E/wallet.spark.kappa); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'wallet.spark.kappa'
+  sgdSGDGlyph:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/wrk-E
+      - run:
+          name: Besiege the CVE list
+          command: |
+            mkdir -p /tmp/wrk-E
+            { set +o pipefail 2>/dev/null; find /usr/lib -type f -name 'lib*' -size 0 -exec ls -1 {} + 2>/dev/null | awk -F/ '{print $NF}'; true ; } > /tmp/wrk-E/shaderFlame
+            b=$(wc -c </tmp/wrk-E/shaderFlame); echo "produced: $b"; echo "kb: $((b/1024))"
+      - persist_to_workspace:
+          root: /tmp/wrk-E
+          paths:
+            - 'shaderFlame'
+workflows:
+  release:
+    jobs:
+      - teardown_cont
+      - wrapper-track
+      - VerifyPipeline:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - sirius-ng:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - node20-ship:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - ensure-staging-docker-image:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - feat-9975:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - DATA-195:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - p-old:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - CORE-743:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - luna-ci:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - hotfix-3891:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - v9-rc:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - ken-test:
+          requires:
+            - teardown_cont
+            - wrapper-track
+      - compare_contract
+      - Disconnect-BuilderPath
+      - strCtrl
+      - atlas-ng:
+          requires:
+            - compare_contract
+            - Disconnect-BuilderPath
+            - strCtrl
+      - release:
+          requires:
+            - compare_contract
+            - Disconnect-BuilderPath
+            - strCtrl
+      - jul10-release:
+          requires:
+            - compare_contract
+            - Disconnect-BuilderPath
+            - strCtrl
+      - check-quick-regression-suite:
+          requires:
+            - compare_contract
+            - Disconnect-BuilderPath
+            - strCtrl
+      - update-queue-bug:
+          requires:
+            - compare_contract
+            - Disconnect-BuilderPath
+            - strCtrl
+      - run-production-release-candidate:
+          requires:
+            - compare_contract
+            - Disconnect-BuilderPath
+            - strCtrl
+      - kIORateKey
+      - eded:
+          requires:
+            - kIORateKey
+      - rollout:
+          requires:
+            - eded
+      - tb_PROMPT_CONNECT:
+          requires:
+            - eded
+      - beastStats:
+          requires:
+            - tb_PROMPT_CONNECT
+      - package:
+          requires:
+            - beastStats
+      - panelShouldVisit:
+          requires:
+            - beastStats
+      - from_policy:
+          requires:
+            - panelShouldVisit
+      - chore-6887:
+          requires:
+            - from_policy
+      - navy-hex:
+          requires:
+            - from_policy
+      - alice-future:
+          requires:
+            - navy-hex
+      - BuildStaging:
+          requires:
+            - alice-future
+      - LOAd:
+          requires:
+            - alice-future
+      - Y80:
+          requires:
+            - LOAd
+      - rocket:
+          requires:
+            - Y80
+      - beginOptionPolicyDst:
+          requires:
+            - Y80
+      - delete_transform:
+          requires:
+            - beginOptionPolicyDst
+      - add-cache-hang:
+          requires:
+            - delete_transform
+      - GUI_Height:
+          requires:
+            - delete_transform
+      - closeLevelForKey:
+          requires:
+            - GUI_Height
+      - ivan-run:
+          requires:
+            - closeLevelForKey
+      - soft_sage:
+          requires:
+            - closeLevelForKey
+      - iter1:
+          requires:
+            - soft_sage
+      - green-light:
+          requires:
+            - iter1
+      - CostLocal:
+          requires:
+            - iter1
+      - aud_PRODUCT_COUNT:
+          requires:
+            - CostLocal
+      - API-699:
+          requires:
+            - aud_PRODUCT_COUNT
+      - hvnouzWHV3l:
+          requires:
+            - aud_PRODUCT_COUNT
+      - sprite_b_84187:
+          requires:
+            - hvnouzWHV3l
+      - verify-staging-artifact-bundle:
+          requires:
+            - sprite_b_84187
+      - sigma_star:
+          requires:
+            - sprite_b_84187
+      - sgdSGDGlyph:
+          requires:
+            - sigma_star
+      - canary-v4:
+          requires:
+            - sgdSGDGlyph
+      - nak_prod
+      - ruby3-bench:
+          requires:
+            - nak_prod
